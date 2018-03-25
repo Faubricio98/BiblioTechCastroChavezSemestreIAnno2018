@@ -12,6 +12,7 @@ import domain.Laptop;
 import domain.Parlantes;
 import domain.Proyector;
 import java.text.DateFormat;
+import javax.swing.JButton;
 
 /**
  *
@@ -20,7 +21,6 @@ import java.text.DateFormat;
 public class InterfaceAV extends javax.swing.JFrame {
 
     DateFormat df= DateFormat.getDateInstance();
-    Audiovisuales aud;
     public InterfaceAV() {
         initComponents();
     }
@@ -295,53 +295,60 @@ public class InterfaceAV extends javax.swing.JFrame {
         if(blancSpace(jComboBox1.getSelectedIndex())==0){
             IncompleteData inData=new IncompleteData();
             inData.setVisible(true);
-        }
+        }else{
+            if(jComboBox1.getSelectedIndex()==0){
+                Laptop lap=new Laptop();
+                atributesDefault(lap);
+                lap.setOperativeSys(operativeSystem.getText());
+            }//guarda datos laptop
+            if(jComboBox1.getSelectedIndex()==1){
+                Proyector pro=new Proyector();
+                atributesDefault(pro);
+                if(availableConect.isSelected()==true){
+                    pro.setWireless(true);
+                }else{//conexion inalambrica
+                    pro.setWireless(false);
+                }//conexion inalambrica
+            }//guarda datos proyector
+            if(jComboBox1.getSelectedIndex()==2){
+                Parlantes par=new Parlantes();
+                atributesDefault(par);
+                if(positiveBth.isSelected()==true){
+                    par.setBluethoot(true);
+                }else{//conexion bluetooth
+                    par.setBluethoot(false);
+                }//conexion bluetooth
+            }//guarda datos parlantes
+            if(jComboBox1.getSelectedIndex()==3){
+                Cds cds=new Cds();
+                atributesDefault(cds);
+                cds.setContentInfo(contentField.getText());
+            }//guarda datos cds
+            if(jComboBox1.getSelectedIndex()==4){
+                Dvds dvds=new Dvds();
+                atributesDefault(dvds);
+                dvds.setContentInfo(contentField.getText());
+            }//guarda datos dds
+        }//if de validacion
+        
+        dispositiveName.setText("");
+        brandName.setText("");
+        registerNumber.setText("");
+        dateRegister.setDate(null);
+        buttonGroup2.clearSelection();
+        buttonGroup1.clearSelection();
+        operativeSystem.setText("");
+        buttonGroup3.clearSelection();
+        buttonGroup4.clearSelection();
+        contentField.setText("");
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void goodConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goodConditionActionPerformed
-        if(jComboBox1.getSelectedIndex()==0){
-            aud=new Laptop();
-            aud.setCondition(true);
-        }
-        if(jComboBox1.getSelectedIndex()==1){
-            aud=new Proyector();
-            aud.setCondition(true);
-        }
-        if(jComboBox1.getSelectedIndex()==2){
-            aud=new Parlantes();
-            aud.setCondition(true);
-        }
-        if(jComboBox1.getSelectedIndex()==3){
-            aud=new Cds();
-            aud.setCondition(true);
-        }
-        if(jComboBox1.getSelectedIndex()==4){
-            aud=new Dvds();
-            aud.setCondition(true);
-        }
+
     }//GEN-LAST:event_goodConditionActionPerformed
 
     private void badConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_badConditionActionPerformed
-        if(jComboBox1.getSelectedIndex()==0){
-            aud=new Laptop();
-            aud.setCondition(false);
-        }
-        if(jComboBox1.getSelectedIndex()==1){
-            aud=new Proyector();
-            aud.setCondition(false);
-        }
-        if(jComboBox1.getSelectedIndex()==2){
-            aud=new Parlantes();
-            aud.setCondition(false);
-        }
-        if(jComboBox1.getSelectedIndex()==3){
-            aud=new Cds();
-            aud.setCondition(false);
-        }
-        if(jComboBox1.getSelectedIndex()==4){
-            aud=new Dvds();
-            aud.setCondition(false);
-        }
+        
     }//GEN-LAST:event_badConditionActionPerformed
 
     private void availableConectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_availableConectActionPerformed
@@ -464,33 +471,51 @@ public class InterfaceAV extends javax.swing.JFrame {
     
     public int blancSpace(int index){
         int control=0;
-        if(index==0){
-            if(dispositiveName.getText().equals("") || brandName.getText().equals("")
-                || registerNumber.getText().equals("") || operativeSystem.getText().equals("")){
-                return control=0;
-            }else{
-                return control=1;
-            }//if interno 0
-        }else{//if de control 0
-            if(index==1 || index==2){
-                if(dispositiveName.getText().equals("") || brandName.getText().equals("")
-                || registerNumber.getText().equals("")){
-                    return control=0;
-                }else{
-                    return control=1;
-                }//if interno 1 y 2
-            }else{//if de control 1 y 2
-                if(index>=3){
-                    if(dispositiveName.getText().equals("") || brandName.getText().equals("")
-                        || registerNumber.getText().equals("") || contentField.getText().equals("")){
-                        return control=0;
-                    }else{
-                        return control=1;
-                    }
-                }//if de control 3 y 4
+        
+        if(dispositiveName.getText().equals("") ||
+                brandName.getText().equals("") ||
+                registerNumber.getText().equals("") ||
+                buttonGroup1.isSelected(null)==true ||
+                buttonGroup2.isSelected(null)==true ||
+                dateRegister.getDate()==null){
+            control=0;
+        }else{
+            control=1;
+            if(index==0 && operativeSystem.getText().equals("")){
+                control=0;
+            }//valida atributo especifico de laptop
+            if(index==1 && buttonGroup3.isSelected(null)==true){
+                control=0;
+            }//valida atributo especifico de proyector
+            if(index==2 && buttonGroup4.isSelected(null)==true){
+                control=0;
+            }//valida atributo especifico de parlantes
+            if(index>=3 && contentField.getText().equals("")){
+                control=0;
             }
-        }//else mayor
+        }
+        
         return control;
     }//fin metodo
-
+    
+    public int convertInt(){
+        return Integer.parseInt(registerNumber.getText());
+    }
+    
+    public void atributesDefault(Audiovisuales ad){
+        ad.setDispositive(dispositiveName.getText());
+        ad.setBrand(brandName.getText());
+        ad.setRegisterNumber(convertInt());
+        if(goodCondition.isSelected()==true){
+            ad.setCondition(true);
+        }else{//verifica condicion
+            ad.setCondition(false);
+        }//verifica condicion
+        ad.setEntryDate(df.format(dateRegister.getDate()));
+        if(disponible.isSelected()==true){
+            ad.setAvailability(true);
+        }else{//verifica disponiblilidad
+            ad.setAvailability(false);
+        }//verifica disponibilidad
+    }
 }
