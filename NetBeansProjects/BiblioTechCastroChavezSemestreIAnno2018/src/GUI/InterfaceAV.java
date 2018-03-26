@@ -12,7 +12,11 @@ import domain.Laptop;
 import domain.Parlantes;
 import domain.Proyector;
 import java.text.DateFormat;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,6 +27,16 @@ public class InterfaceAV extends javax.swing.JFrame {
     DateFormat df= DateFormat.getDateInstance();
     public InterfaceAV() {
         initComponents();
+        setLocationRelativeTo(null);
+        setSize(450, 450);
+        setTitle("Audiovisual");
+        setIconImage(new ImageIcon(getClass().getResource("/images/images.jpg")).getImage());
+        ((JPanel)getContentPane()).setOpaque(false);
+        ImageIcon uno=new ImageIcon(this.getClass().getResource("/images/audiovisuales.jpg"));
+        JLabel fondo=new JLabel();
+        fondo.setIcon(uno);
+        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
     }
 
     /**
@@ -106,6 +120,7 @@ public class InterfaceAV extends javax.swing.JFrame {
 
         contentField.setVisible(false);
 
+        registerButton.setBackground(new java.awt.Color(153, 0, 204));
         registerButton.setText("Registrar");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

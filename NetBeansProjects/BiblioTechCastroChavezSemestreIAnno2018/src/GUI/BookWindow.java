@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import domain.Books;
+import domain.DigitalBook;
+import domain.MaterialBook;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -18,7 +20,7 @@ public class BookWindow extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setSize(450, 450);
-        setLocation(500,200);
+        setLocation(300, 200);
         setTitle("Books");
         setIconImage(new ImageIcon(getClass().getResource("/images/images.jpg")).getImage());
         ((JPanel)getContentPane()).setOpaque(false);
@@ -51,16 +53,14 @@ public class BookWindow extends javax.swing.JFrame {
         jTextAuthor = new javax.swing.JTextField();
         jLabelISBN = new javax.swing.JLabel();
         jTextISBN = new javax.swing.JTextField();
-        jPanelMaterial = new javax.swing.JPanel();
+        jTextFieldStorage = new javax.swing.JTextField();
+        jTextFieldFormat = new javax.swing.JTextField();
+        jLabelFormat = new javax.swing.JLabel();
+        jLabelStorage = new javax.swing.JLabel();
+        jTextFieldCover = new javax.swing.JTextField();
         jLabelCover = new javax.swing.JLabel();
         jLabelSheets = new javax.swing.JLabel();
         jTextFieldSheets = new javax.swing.JTextField();
-        jTextFieldCover = new javax.swing.JTextField();
-        jPanelDigital = new javax.swing.JPanel();
-        jLabelFormat = new javax.swing.JLabel();
-        jLabelStorage = new javax.swing.JLabel();
-        jTextFieldStorage = new javax.swing.JTextField();
-        jTextFieldFormat = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -70,7 +70,7 @@ public class BookWindow extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jButtonRegister.setBackground(new java.awt.Color(51, 51, 0));
+        jButtonRegister.setBackground(new java.awt.Color(153, 153, 0));
         jButtonRegister.setText("Register");
         jButtonRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,111 +149,53 @@ public class BookWindow extends javax.swing.JFrame {
         getContentPane().add(jTextISBN);
         jTextISBN.setBounds(80, 150, 130, 30);
 
-        jLabelCover.setText("Cover");
-
-        jLabelSheets.setText("Sheets");
-
-        jTextFieldSheets.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldSheetsActionPerformed(evt);
-            }
-        });
-
-        jTextFieldCover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCoverActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelMaterialLayout = new javax.swing.GroupLayout(jPanelMaterial);
-        jPanelMaterial.setLayout(jPanelMaterialLayout);
-        jPanelMaterialLayout.setHorizontalGroup(
-            jPanelMaterialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMaterialLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelMaterialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMaterialLayout.createSequentialGroup()
-                        .addComponent(jLabelCover)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCover, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelMaterialLayout.createSequentialGroup()
-                        .addComponent(jLabelSheets)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldSheets, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-        jPanelMaterialLayout.setVerticalGroup(
-            jPanelMaterialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMaterialLayout.createSequentialGroup()
-                .addGroup(jPanelMaterialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMaterialLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabelCover))
-                    .addComponent(jTextFieldCover, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelMaterialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMaterialLayout.createSequentialGroup()
-                        .addComponent(jLabelSheets)
-                        .addGap(0, 16, Short.MAX_VALUE))
-                    .addComponent(jTextFieldSheets))
-                .addContainerGap())
-        );
-
-        getContentPane().add(jPanelMaterial);
-        jPanelMaterial.setBounds(200, 280, 170, 90);
-
-        jLabelFormat.setText("Format");
-
-        jLabelStorage.setText("Storage");
-
         jTextFieldStorage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldStorageActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldStorage);
+        jTextFieldStorage.setBounds(80, 290, 79, 30);
 
         jTextFieldFormat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldFormatActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldFormat);
+        jTextFieldFormat.setBounds(80, 250, 105, 31);
 
-        javax.swing.GroupLayout jPanelDigitalLayout = new javax.swing.GroupLayout(jPanelDigital);
-        jPanelDigital.setLayout(jPanelDigitalLayout);
-        jPanelDigitalLayout.setHorizontalGroup(
-            jPanelDigitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDigitalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelDigitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDigitalLayout.createSequentialGroup()
-                        .addComponent(jLabelFormat)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldFormat, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelDigitalLayout.createSequentialGroup()
-                        .addComponent(jLabelStorage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldStorage, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-        jPanelDigitalLayout.setVerticalGroup(
-            jPanelDigitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDigitalLayout.createSequentialGroup()
-                .addGroup(jPanelDigitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDigitalLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabelFormat))
-                    .addComponent(jTextFieldFormat, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelDigitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDigitalLayout.createSequentialGroup()
-                        .addComponent(jLabelStorage)
-                        .addGap(0, 16, Short.MAX_VALUE))
-                    .addComponent(jTextFieldStorage))
-                .addContainerGap())
-        );
+        jLabelFormat.setText("Format");
+        getContentPane().add(jLabelFormat);
+        jLabelFormat.setBounds(20, 250, 50, 14);
 
-        getContentPane().add(jPanelDigital);
-        jPanelDigital.setBounds(20, 280, 170, 90);
+        jLabelStorage.setText("Storage");
+        getContentPane().add(jLabelStorage);
+        jLabelStorage.setBounds(20, 300, 60, 14);
+
+        jTextFieldCover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCoverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldCover);
+        jTextFieldCover.setBounds(300, 240, 105, 31);
+
+        jLabelCover.setText("Cover");
+        getContentPane().add(jLabelCover);
+        jLabelCover.setBounds(240, 250, 50, 14);
+
+        jLabelSheets.setText("Sheets");
+        getContentPane().add(jLabelSheets);
+        jLabelSheets.setBounds(243, 300, 50, 14);
+
+        jTextFieldSheets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSheetsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldSheets);
+        jTextFieldSheets.setBounds(300, 290, 79, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -263,33 +205,10 @@ public class BookWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jComboBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBooksActionPerformed
-        // TODO add your handling code here:
-        String msj=jComboBooks.getSelectedItem().toString();
-        lblType.setText(msj);
-        String material="Material Book";
-        if(msj.equalsIgnoreCase(material)){
-            //jPanelDigital.setEnabled(false);
-            jTextFieldFormat.setEnabled(false);
-            jTextFieldFormat.setEditable(false);
-            jTextFieldStorage.setEnabled(false);
-            jTextFieldStorage.setEditable(false);
-            jTextFieldCover.setEnabled(true);
-            jTextFieldCover.setEditable(true);
-            jTextFieldSheets.setEnabled(true);
-            jTextFieldSheets.setEditable(true);
-        }
-        else{
-            //jPanelMaterial.setEnabled(false);
-            jTextFieldCover.setEnabled(false);
-            jTextFieldCover.setEditable(false);
-            jTextFieldSheets.setEnabled(false);
-            jTextFieldSheets.setEditable(false);
-            jTextFieldFormat.setEnabled(true);
-            jTextFieldFormat.setEditable(true);
-            jTextFieldStorage.setEnabled(true);
-            jTextFieldStorage.setEditable(true);
-        }
-        
+        int index=jComboBooks.getSelectedIndex();
+        invisible();
+        visibleAV(index);
+
     }//GEN-LAST:event_jComboBooksActionPerformed
 
     
@@ -318,23 +237,46 @@ public class BookWindow extends javax.swing.JFrame {
         jTextFieldSheets.setEditable(false);
     }//GEN-LAST:event_jTextFieldSheetsActionPerformed
 
-    private void jTextFieldCoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCoverActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCoverActionPerformed
-
-    private void jTextFieldStorageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldStorageActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldStorageActionPerformed
-
     private void jTextFieldFormatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFormatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldFormatActionPerformed
 
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
-        
-        
+        if(blancSpace(jComboBooks.getSelectedIndex())==0){
+            IncompleteData inData=new IncompleteData();
+            inData.setVisible(true);
+        }else{
+            if(jComboBooks.getSelectedIndex()==0){
+                MaterialBook MatB=new MaterialBook();
+                defaultAtribtes(MatB);
+                MatB.setCover(jTextFieldCover.getText());
+                MatB.setSheets(Integer.parseInt(jTextFieldSheets.getText()));
+            }//guarda datos Libros 
+            if(jComboBooks.getSelectedIndex()==1){
+                DigitalBook DigB=new DigitalBook();
+                defaultAtribtes(DigB);
+                DigB.setFormat(jTextFieldFormat.getText());
+                DigB.setStorage(Float.parseFloat(jTextFieldStorage.getText()));
+                }//guarda datos Libros digitales
+            }//if de validacion
+        jTextTitle.setText("");
+        jTextAuthor.setText("");
+        jTextISBN.setText("");
+        jTextYear.setText("");
+        jTextFieldCover.setText("");
+        jTextFieldFormat.setText("");
+        jTextFieldSheets.setText("");
+        jTextFieldStorage.setText("");
         
     }//GEN-LAST:event_jButtonRegisterActionPerformed
+
+    private void jTextFieldStorageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldStorageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldStorageActionPerformed
+
+    private void jTextFieldCoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCoverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCoverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,8 +326,6 @@ public class BookWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelStorage;
     private javax.swing.JLabel jLabelType;
     private javax.swing.JLabel jLabelYear;
-    private javax.swing.JPanel jPanelDigital;
-    private javax.swing.JPanel jPanelMaterial;
     private javax.swing.JTextField jTextAuthor;
     private javax.swing.JTextField jTextFieldCover;
     private javax.swing.JTextField jTextFieldFormat;
@@ -396,4 +336,73 @@ public class BookWindow extends javax.swing.JFrame {
     private javax.swing.JTextField jTextYear;
     private javax.swing.JLabel lblType;
     // End of variables declaration//GEN-END:variables
+    
+    public void visibleAV(int index){
+        if(index==0){
+            jTextTitle.setVisible(true);
+            jTextAuthor.setVisible(true);
+            jTextISBN.setVisible(true);
+            jTextYear.setVisible(true);
+            jTextFieldCover.setVisible(true);
+            jTextFieldSheets.setVisible(true);
+            jTextFieldFormat.setVisible(false);
+            jTextFieldStorage.setVisible(false);
+        }
+        else{
+            jTextTitle.setVisible(true);
+            jTextAuthor.setVisible(true);
+            jTextISBN.setVisible(true);
+            jTextYear.setVisible(true);
+            jTextFieldCover.setVisible(false);
+            jTextFieldSheets.setVisible(false);
+            jTextFieldFormat.setVisible(true);
+            jTextFieldStorage.setVisible(true);
+        }
+    }    
+    public void invisible(){
+        jTextTitle.setVisible(true);
+        jTextAuthor.setVisible(true);
+        jTextISBN.setVisible(true);
+        jTextYear.setVisible(true);
+        jTextFieldCover.setVisible(true);
+        jTextFieldFormat.setVisible(true);
+        jTextFieldSheets.setVisible(true);
+        jTextFieldStorage.setVisible(true);
+        
+    }
+    public int blancSpace(int index){
+        int control=0;
+        
+        if(jTextTitle.getText().equals("") ||
+                jTextAuthor.getText().equals("") ||
+                jTextAuthor.getText().equals("") ||
+                jTextISBN.getText().equals("") ||
+                jTextYear.getText().equals("") ||
+                jTextFieldCover.getText().equals("") ||
+                jTextFieldSheets.getText().equals("")){
+               
+            control=0;
+        }else{
+            control=1;
+            if(index==0 && jTextFieldFormat.getText().equals("") && jTextFieldStorage.getText().equals("")){
+                control=0;
+            }
+        }
+        return control;
+    }//fin metodo
+    
+    private void defaultAtribtes(Books b){
+        if((jComboBooks.getSelectedItem().toString()).equalsIgnoreCase("Material Book")){//pregunta la opcion elegida en el combobox
+            b.setType(jComboBooks.getSelectedItem().toString());//elige libro físico
+        }
+        else{
+            b.setType(jComboBooks.getSelectedItem().toString());//elige libro digital
+        }
+        b.setTitle(jTextTitle.getText());
+        b.setAuthor(jTextAuthor.getText());
+        b.setIsbn(Integer.parseInt(jTextISBN.getText()));
+        b.setYear(Integer.parseInt(jTextYear.getText()));
+        
+    }
 }
+
