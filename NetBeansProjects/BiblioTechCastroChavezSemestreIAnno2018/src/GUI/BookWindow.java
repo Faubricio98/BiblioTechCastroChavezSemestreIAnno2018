@@ -10,6 +10,7 @@ import domain.MaterialBook;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -213,28 +214,23 @@ public class BookWindow extends javax.swing.JFrame {
 
     
     private void jTextYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextYearActionPerformed
-        jTextYear.setEnabled(false);
-        jTextYear.setEditable(false);
+
     }//GEN-LAST:event_jTextYearActionPerformed
 
     private void jTextTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextTitleActionPerformed
-        jTextTitle.setEnabled(false);
-        jTextTitle.setEditable(false);
+
     }//GEN-LAST:event_jTextTitleActionPerformed
 
     private void jTextAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextAuthorActionPerformed
-        jTextAuthor.setEnabled(false);
-        jTextAuthor.setEditable(false);
+
     }//GEN-LAST:event_jTextAuthorActionPerformed
 
     private void jTextISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextISBNActionPerformed
-        jTextISBN.setEnabled(false);
-        jTextISBN.setEditable(false);
+
     }//GEN-LAST:event_jTextISBNActionPerformed
 
     private void jTextFieldSheetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSheetsActionPerformed
-        jTextFieldSheets.setEnabled(false);
-        jTextFieldSheets.setEditable(false);
+
     }//GEN-LAST:event_jTextFieldSheetsActionPerformed
 
     private void jTextFieldFormatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFormatActionPerformed
@@ -267,6 +263,7 @@ public class BookWindow extends javax.swing.JFrame {
         jTextFieldFormat.setText("");
         jTextFieldSheets.setText("");
         jTextFieldStorage.setText("");
+        JOptionPane.showMessageDialog(null, "Datos registrados");
         
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
