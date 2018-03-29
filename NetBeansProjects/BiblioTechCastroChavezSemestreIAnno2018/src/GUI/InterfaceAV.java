@@ -27,16 +27,16 @@ public class InterfaceAV extends javax.swing.JFrame {
     DateFormat df= DateFormat.getDateInstance();
     public InterfaceAV() {
         initComponents();
-        setLocationRelativeTo(null);
-        setSize(450, 450);
-        setTitle("Audiovisual");
-        setIconImage(new ImageIcon(getClass().getResource("/images/images.jpg")).getImage());
-        ((JPanel)getContentPane()).setOpaque(false);
-        ImageIcon uno=new ImageIcon(this.getClass().getResource("/images/audiovisuales.jpg"));
-        JLabel fondo=new JLabel();
-        fondo.setIcon(uno);
-        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
-        fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
+//        setLocationRelativeTo(null);
+//        setSize(450, 450);
+//        setTitle("Audiovisual");
+//        setIconImage(new ImageIcon(getClass().getResource("/images/images.jpg")).getImage());
+//        ((JPanel)getContentPane()).setOpaque(false);
+//        ImageIcon uno=new ImageIcon(this.getClass().getResource("/images/audiovisuales.jpg"));
+//        JLabel fondo=new JLabel();
+//        fondo.setIcon(uno);
+//        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+//        fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
     }
 
     /**
