@@ -76,7 +76,6 @@ public class InterfaceCH extends javax.swing.JFrame {
     }
     
     public void insertar(String name,String carnet,String career, int year){
-        //DecimalFormat d = new DecimalFormat("####.00");
         String n = name;
         String carne=carnet;
         String caree = career;
@@ -87,25 +86,15 @@ public class InterfaceCH extends javax.swing.JFrame {
      public void m_consultar(){
         String co=jTextFieldS.getText();
         int p = aS.search(co);
-        int n = aS.getSize();
+        
        
         if(p == -1){
             escribir("Codigo no existe");
             JOptionPane.showMessageDialog(null, "do babe");
         }else{
-            for(int i=0; i<n; i++){
-                open = aS.getStudent(p);
-//                String na = open.getName();
-//                String carnet = open.getCarnet();
-                String career = open.getCareer();
-//                int a = open.getAgro();
-                
-                if(career==co){
-                    new InterfaceAB().setVisible(true);
-                }
-                    
-                
-            }
+            JOptionPane.showMessageDialog(null, "Bienvenido");
+            new InterfaceAB().setVisible(true);
+            dispose();
         }
      }
     public  void m_modificar(){
