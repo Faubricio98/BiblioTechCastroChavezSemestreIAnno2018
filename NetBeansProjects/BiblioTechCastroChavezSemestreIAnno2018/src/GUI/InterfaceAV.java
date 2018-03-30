@@ -5,13 +5,18 @@
  */
 package GUI;
 
+import data.AvFile;
 import domain.Audiovisuales;
 import domain.Cds;
 import domain.Dvds;
 import domain.Laptop;
 import domain.Parlantes;
 import domain.Proyector;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -307,55 +312,66 @@ public class InterfaceAV extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        if(blancSpace(jComboBox1.getSelectedIndex())==0){
-            IncompleteData inData=new IncompleteData();
-            inData.setVisible(true);
-        }else{
-            if(jComboBox1.getSelectedIndex()==0){
-                Laptop lap=new Laptop();
-                atributesDefault(lap);
-                lap.setOperativeSys(operativeSystem.getText());
-            }//guarda datos laptop
-            if(jComboBox1.getSelectedIndex()==1){
-                Proyector pro=new Proyector();
-                atributesDefault(pro);
-                if(availableConect.isSelected()==true){
-                    pro.setWireless(true);
-                }else{//conexion inalambrica
-                    pro.setWireless(false);
-                }//conexion inalambrica
-            }//guarda datos proyector
-            if(jComboBox1.getSelectedIndex()==2){
-                Parlantes par=new Parlantes();
-                atributesDefault(par);
-                if(positiveBth.isSelected()==true){
-                    par.setBluethoot(true);
-                }else{//conexion bluetooth
-                    par.setBluethoot(false);
-                }//conexion bluetooth
-            }//guarda datos parlantes
-            if(jComboBox1.getSelectedIndex()==3){
-                Cds cds=new Cds();
-                atributesDefault(cds);
-                cds.setContentInfo(contentField.getText());
-            }//guarda datos cds
-            if(jComboBox1.getSelectedIndex()==4){
-                Dvds dvds=new Dvds();
-                atributesDefault(dvds);
-                dvds.setContentInfo(contentField.getText());
-            }//guarda datos dds
-        }//if de validacion
-        
-        dispositiveName.setText("");
-        brandName.setText("");
-        registerNumber.setText("");
-        dateRegister.setDate(null);
-        buttonGroup2.clearSelection();
-        buttonGroup1.clearSelection();
-        operativeSystem.setText("");
-        buttonGroup3.clearSelection();
-        buttonGroup4.clearSelection();
-        contentField.setText("");
+        try {
+            File file=new File("./AvFile.dat");
+            AvFile avFile=new AvFile(file);
+            if(blancSpace(jComboBox1.getSelectedIndex())==0){
+                IncompleteData inData=new IncompleteData();
+                inData.setVisible(true);
+            }else{
+                if(jComboBox1.getSelectedIndex()==0){
+                    Laptop lap=new Laptop();
+                    atributesDefault(lap);
+                    lap.setOperativeSys(operativeSystem.getText());
+                    avFile.addEndRecordLaptop(lap);
+                }//guarda datos laptop
+                if(jComboBox1.getSelectedIndex()==1){
+                    Proyector pro=new Proyector();
+                    atributesDefault(pro);
+                    if(availableConect.isSelected()==true){
+                        pro.setWireless(true);
+                    }else{//conexion inalambrica
+                        pro.setWireless(false);
+                    }//conexion inalambrica
+                    avFile.addEndRecordProyector(pro);
+                }//guarda datos proyector
+                if(jComboBox1.getSelectedIndex()==2){
+                    Parlantes par=new Parlantes();
+                    atributesDefault(par);
+                    if(positiveBth.isSelected()==true){
+                        par.setBluethoot(true);
+                    }else{//conexion bluetooth
+                        par.setBluethoot(false);
+                    }//conexion bluetooth
+                    avFile.addEndRecordParlantes(par);
+                }//guarda datos parlantes
+                if(jComboBox1.getSelectedIndex()==3){
+                    Cds cds=new Cds();
+                    atributesDefault(cds);
+                    cds.setContentInfo(contentField.getText());
+                    avFile.addEndRecordCds(cds);
+                }//guarda datos cds
+                if(jComboBox1.getSelectedIndex()==4){
+                    Dvds dvds=new Dvds();
+                    atributesDefault(dvds);
+                    dvds.setContentInfo(contentField.getText());
+                    avFile.addEndRecordDvd(dvds);
+                }//guarda datos dds
+            }//if de validacion
+            
+            dispositiveName.setText("");
+            brandName.setText("");
+            registerNumber.setText("");
+            dateRegister.setDate(null);
+            buttonGroup2.clearSelection();
+            buttonGroup1.clearSelection();
+            operativeSystem.setText("");
+            buttonGroup3.clearSelection();
+            buttonGroup4.clearSelection();
+            contentField.setText("");
+        } catch (IOException ex) {
+            Logger.getLogger(InterfaceAV.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void goodConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goodConditionActionPerformed

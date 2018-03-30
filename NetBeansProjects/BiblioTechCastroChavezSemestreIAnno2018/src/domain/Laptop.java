@@ -36,5 +36,7 @@ public class Laptop extends Audiovisuales{
         return super.toString()+" Laptop{" + "operativeSys=" + operativeSys + '}';
     }
     
-    
+    public int sizeInBytes(){
+        return super.sizeInBytes()+getOperativeSys().length()*2;
+    }
 }

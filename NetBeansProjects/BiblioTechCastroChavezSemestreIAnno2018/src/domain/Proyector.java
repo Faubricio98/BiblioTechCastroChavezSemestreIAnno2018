@@ -36,5 +36,7 @@ public class Proyector extends Audiovisuales{
         return super.toString()+" Proyector{" + "wireless=" + wireless + '}';
     }
     
-    
+    public int sizeInBytes(){
+        return super.sizeInBytes()+1;
+    }
 }

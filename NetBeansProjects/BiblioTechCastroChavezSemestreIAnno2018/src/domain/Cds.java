@@ -36,5 +36,7 @@ public class Cds extends Audiovisuales{
         return super.toString()+" Cd's{" + "contentInfo=" + contentInfo + '}';
     }
     
-    
+    public int sizeInBytes(){
+        return super.sizeInBytes()+getContentInfo().length()*2;
+    }
 }

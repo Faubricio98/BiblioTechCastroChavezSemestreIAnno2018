@@ -88,5 +88,9 @@ public class Audiovisuales {
         return "Audiovisuales{" + "dispositive=" + dispositive + ", brand=" + brand + ", registerNumber=" + registerNumber + ", condition=" + condition + ", entryDate=" + entryDate + ", availability=" + availability + '}';
     }
     
-    
+    public int sizeInBytes(){
+        return getDispositive().length()*2 +
+                getBrand().length()*2 +
+                4+1+ getEntryDate().length()*2 + 1;
+    }
 }

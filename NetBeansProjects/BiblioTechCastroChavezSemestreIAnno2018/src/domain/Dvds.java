@@ -34,4 +34,8 @@ public class Dvds extends Audiovisuales{
     public String toString() {
         return super.toString()+" Dvd's{" + "contentInfo=" + contentInfo + '}';
     }
+    
+    public int sizeInBytes(){
+        return super.sizeInBytes()+getContentInfo().length()*2;
+    }
 }

@@ -36,5 +36,7 @@ public class Parlantes extends Audiovisuales{
         return super.toString()+" Parlantes{" + "bluethoot=" + bluethoot + '}';
     }
     
-    
+    public int sizeInBytes(){
+        return super.sizeInBytes()+1;
+    }
 }
