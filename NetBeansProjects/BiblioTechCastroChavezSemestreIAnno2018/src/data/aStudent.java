@@ -52,16 +52,16 @@ public class aStudent implements Serializable{
         }
         return -1;
     }
-//    //metodo que especifica la posicion de la persona que se quieren agarrar los datos
-//    public int posicionExacta(String code){
-//        int n=0;
-//        for(int p=0; p<this.getSize(); p++){
-//            if(code.equalsIgnoreCase(this.getStudent(p).getCarnet())){
-//                n=p;
-//                break;
-//            }
-//        }
-//        return n;
-//    }
+    //metodo que especifica la posicion de la persona que se quieren agarrar los datos
+    public int posicionExacta(String code){
+        int n=0;
+        for(int p=0; p<this.getSize(); p++){
+            if(code.equalsIgnoreCase(this.getStudent(p).getCarnet())){
+                n=p;
+                break;
+            }
+        }
+        return n;
+    }
     
 }
