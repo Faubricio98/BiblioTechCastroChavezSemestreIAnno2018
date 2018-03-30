@@ -9,6 +9,6 @@ package data;
  *
  * @author jonathan
  */
-public class BookData {
+public class StudentData {
     
 }

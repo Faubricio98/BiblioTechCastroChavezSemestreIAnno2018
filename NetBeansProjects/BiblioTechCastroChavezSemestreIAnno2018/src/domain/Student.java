@@ -5,30 +5,37 @@
  */
 package domain;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable{
     //atributos
+       
+    
     private String carnet;
     private String name;
     private String career;
+    private int Agro;
+    private int Edu;
+    private int Inf;
     private int year;
+    
     //costructores
 
     public Student() {
         this.carnet = "";
         this.name = "";
         this.career = "";
-        this.year = 0;
-        
     }
-    
 
-    public Student(String carnet, String name, String career, int year) {
+    public Student(String carnet, String name, String career, int Agro, int Edu, int Inf, int year) {
         this.carnet = carnet;
         this.name = name;
         this.career = career;
+        this.Agro = Agro;
+        this.Edu = Edu;
+        this.Inf = Inf;
         this.year = year;
     }
-    //accesores
 
     public String getCarnet() {
         return carnet;
@@ -54,6 +61,30 @@ public class Student {
         this.career = career;
     }
 
+    public int getAgro() {
+        return Agro;
+    }
+
+    public void setAgro(int Agro) {
+        this.Agro = Agro;
+    }
+
+    public int getEdu() {
+        return Edu;
+    }
+
+    public void setEdu(int Edu) {
+        this.Edu = Edu;
+    }
+
+    public int getInf() {
+        return Inf;
+    }
+
+    public void setInf(int Inf) {
+        this.Inf = Inf;
+    }
+
     public int getYear() {
         return year;
     }
@@ -64,7 +95,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "carnet=" + carnet + ", name=" + name + ", career=" + career + ", year=" + year + '}';
+        return "Student{" + "carnet=" + carnet + ", name=" + name + ", career=" + career + ", Agro=" + Agro + ", Edu=" + Edu + ", Inf=" + Inf + ", year=" + year + '}';
     }
     
 }
