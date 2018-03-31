@@ -21,8 +21,8 @@ public class MaterialBook extends Books{
         this.sheets = 0;
     }
 
-    public MaterialBook(String cover, int sheets, String type, String title, String author, int isbn, int year) {
-        super(type, title, author, isbn, year);
+    public MaterialBook(String cover, int sheets, String type, String title, String author, int isbn, int year, boolean aviable) {
+        super(type, title, author, isbn, year, aviable);
         this.cover=cover;
         this.sheets=sheets;
     }
@@ -49,5 +49,7 @@ public class MaterialBook extends Books{
     public String toString() {
         return "MaterialBook{" + "cover=" + cover + ", sheets=" + sheets + '}';
     }
-    
+    public int sizeInBytes(){
+        return super.sizeInBytes()+getCover().length()*2+4+1;
+    }
 }

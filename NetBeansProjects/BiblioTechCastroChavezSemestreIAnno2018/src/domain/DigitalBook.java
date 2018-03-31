@@ -16,8 +16,8 @@ public class DigitalBook extends Books{
         this.format="";
         this.storage=0;
     }
-    public DigitalBook(String format, float storage, String type, String title, String author, int isbn, int year) {
-        super(type, title, author, isbn, year);
+    public DigitalBook(String format, float storage, String type, String title, String author, int isbn, int year, boolean aviable) {
+        super(type, title, author, isbn, year, aviable);
         this.format=format;
         this.storage=0;
     }
@@ -41,5 +41,8 @@ public class DigitalBook extends Books{
     @Override
     public String toString() {
         return "DigitalBook{" + "format=" + format + ", storage=" + storage + '}';
+    }
+    public int sizeInBytes(){
+        return super.sizeInBytes()+getFormat().length()*2+4+1;
     }
 }

@@ -16,7 +16,7 @@ public class Books {
     private String author;
     private int isbn;
     private int year;
-    
+    private boolean aviable;
     
     //constructores
     public Books(){
@@ -25,14 +25,17 @@ public class Books {
         this.author = "";
         this.isbn = 0;
         this.year = 0;
+        this.aviable=false;
+        
     }
 
-    public Books(String type, String title, String author, int isbn, int year) {
+    public Books(String type, String title, String author, int isbn, int year, boolean aviable) {
         this.type = type;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.year=year;
+        this.aviable=aviable;
     }
     
     //accesores
@@ -77,9 +80,25 @@ public class Books {
         this.year = year;
     }
 
+    public boolean isAviable() {
+        return aviable;
+    }
+
+    public void setAviable(boolean aviable) {
+        this.aviable = aviable;
+    }
+
     @Override
     public String toString() {
-        return "Books{" + "type=" + type + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year + '}';
+        return "Books{" + "type=" + type + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", year=" + year + ", aviable=" + aviable + '}';
+    }
+
+    
+    public int sizeInBytes(){
+        return getType().length()*2 +
+                getTitle().length()*2 +
+                getAuthor().length()*2 +
+                4+4;
     }
     
     

@@ -69,7 +69,6 @@ public class InterfaceCH extends javax.swing.JFrame {
             String carnet=open.getCarnet();
             String n = open.getName();
             String career=open.getCareer();
-            
             int y = open.getYear();
             insertar(n, carnet, career, y);
         }

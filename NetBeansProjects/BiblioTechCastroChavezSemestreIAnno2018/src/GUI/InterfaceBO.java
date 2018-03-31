@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package GUI;
+import data.BFile;
 import domain.Books;
 import domain.DigitalBook;
 import domain.MaterialBook;
+import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -14,10 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
-public class BookWindow extends javax.swing.JFrame {
+public class InterfaceBO extends javax.swing.JFrame {
 
     
-    public BookWindow() {
+    public InterfaceBO() {
         initComponents();
         setLocationRelativeTo(null);
         setSize(450, 450);
@@ -238,21 +240,26 @@ public class BookWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFormatActionPerformed
 
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
+        try {
+            File file=new File("./BFile.dat");
+            BFile bFile=new BFile(file);
         if(blancSpace(jComboBooks.getSelectedIndex())==0){
             IncompleteData inData=new IncompleteData();
             inData.setVisible(true);
         }else{
             if(jComboBooks.getSelectedIndex()==0){
                 MaterialBook MatB=new MaterialBook();
-                defaultAtribtes(MatB);
+                defaultAtributes(MatB);
                 MatB.setCover(jTextFieldCover.getText());
                 MatB.setSheets(Integer.parseInt(jTextFieldSheets.getText()));
+                bFile.addEndRecordMaterialBook(MatB);
             }//guarda datos Libros 
             if(jComboBooks.getSelectedIndex()==1){
                 DigitalBook DigB=new DigitalBook();
-                defaultAtribtes(DigB);
+                defaultAtributes(DigB);
                 DigB.setFormat(jTextFieldFormat.getText());
                 DigB.setStorage(Float.parseFloat(jTextFieldStorage.getText()));
+                bFile.addEndRecordDigitalBook(DigB);
                 }//guarda datos Libros digitales
             }//if de validacion
         jTextTitle.setText("");
@@ -264,6 +271,9 @@ public class BookWindow extends javax.swing.JFrame {
         jTextFieldSheets.setText("");
         jTextFieldStorage.setText("");
         JOptionPane.showMessageDialog(null, "Datos registrados");
+        }catch(Exception ex){
+            
+        }
         
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
@@ -292,21 +302,23 @@ public class BookWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BookWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceBO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BookWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceBO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BookWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceBO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BookWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceBO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BookWindow().setVisible(true);
+                new InterfaceBO().setVisible(true);
             }
         });
     }
@@ -374,21 +386,22 @@ public class BookWindow extends javax.swing.JFrame {
                 jTextAuthor.getText().equals("") ||
                 jTextAuthor.getText().equals("") ||
                 jTextISBN.getText().equals("") ||
-                jTextYear.getText().equals("") ||
-                jTextFieldCover.getText().equals("") ||
-                jTextFieldSheets.getText().equals("")){
+                jTextYear.getText().equals("")){
                
             control=0;
         }else{
             control=1;
-            if(index==0 && jTextFieldFormat.getText().equals("") && jTextFieldStorage.getText().equals("")){
+            if(index==0 && jTextFieldCover.getText().equals("") && jTextFieldSheets.getText().equals("")){
                 control=0;
             }
+            if(index==1 && jTextFieldFormat.getText().equals("") && jTextFieldStorage.getText().equals("") ){
+                control=0;
+            }//valida atributo especifico de proyector
         }
         return control;
     }//fin metodo
     
-    private void defaultAtribtes(Books b){
+    private void defaultAtributes(Books b){
         if((jComboBooks.getSelectedItem().toString()).equalsIgnoreCase("Material Book")){//pregunta la opcion elegida en el combobox
             b.setType(jComboBooks.getSelectedItem().toString());//elige libro físico
         }
@@ -399,6 +412,7 @@ public class BookWindow extends javax.swing.JFrame {
         b.setAuthor(jTextAuthor.getText());
         b.setIsbn(Integer.parseInt(jTextISBN.getText()));
         b.setYear(Integer.parseInt(jTextYear.getText()));
+        b.setAviable(true);
         
     }
 }
