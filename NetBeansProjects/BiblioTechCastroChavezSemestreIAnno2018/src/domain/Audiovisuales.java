@@ -93,4 +93,13 @@ public class Audiovisuales {
                 getBrand().length()*2 +
                 4+1+ getEntryDate().length()*2 + 1;
     }
+    public boolean empiezaPor(String inicio) {
+        if(inicio.isEmpty() || inicio.length()>dispositive.length())
+            return false;
+        for(int i=0; i<inicio.length(); ++i)
+            if( inicio.charAt(i) != dispositive.charAt(i) )
+                return false;
+        return true;
+    }
+    
 }

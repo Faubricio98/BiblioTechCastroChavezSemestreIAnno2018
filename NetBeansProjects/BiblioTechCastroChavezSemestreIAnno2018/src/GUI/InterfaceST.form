@@ -35,10 +35,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jTextFieldN" min="-2" pref="160" max="-2" attributes="0"/>
                   <Component id="jComboCareer" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                  <Component id="jLabelcarnet2" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabelcarnet2" min="-2" pref="90" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jButtonB" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="jTextFieldY" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="55" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -68,9 +72,12 @@
                   <Component id="jComboCareer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabelCarnet" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelcarnet2" min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabelCarnet" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelcarnet2" min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jButtonB" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="64" max="32767" attributes="0"/>
           </Group>
@@ -132,6 +139,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonB">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Back"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

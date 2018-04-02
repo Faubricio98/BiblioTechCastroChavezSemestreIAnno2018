@@ -98,7 +98,7 @@ public class Books {
         return getType().length()*2 +
                 getTitle().length()*2 +
                 getAuthor().length()*2 +
-                4+4;
+                4+4+1;
     }
     
     

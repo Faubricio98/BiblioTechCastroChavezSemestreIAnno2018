@@ -28,6 +28,7 @@ public class InterfaceCH extends javax.swing.JFrame {
     
     public InterfaceCH() {
         initComponents();
+        setLocationRelativeTo(null);
         miModelo = new DefaultTableModel(data,cabecera);
         jtable.setModel(miModelo);
         aS = new aStudent();
@@ -89,9 +90,10 @@ public class InterfaceCH extends javax.swing.JFrame {
        
         if(p == -1){
             escribir("Codigo no existe");
-            JOptionPane.showMessageDialog(null, "do babe");
+            
         }else{
-            JOptionPane.showMessageDialog(null, "Bienvenido");
+            escribir("Bienvenido");
+            //aS.saveStudent(p);
             new InterfaceAB().setVisible(true);
             dispose();
         }

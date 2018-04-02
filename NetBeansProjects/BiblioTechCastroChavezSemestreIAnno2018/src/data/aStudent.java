@@ -63,5 +63,9 @@ public class aStudent implements Serializable{
         }
         return n;
     }
-    
+    public Student saveStudent(Student s){
+        Student es=new Student();
+        es=s;
+        return es;
+    }
 }

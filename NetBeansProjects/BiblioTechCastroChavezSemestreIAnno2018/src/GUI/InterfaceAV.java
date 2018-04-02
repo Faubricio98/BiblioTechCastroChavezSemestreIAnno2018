@@ -12,6 +12,7 @@ import domain.Dvds;
 import domain.Laptop;
 import domain.Parlantes;
 import domain.Proyector;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -32,7 +33,7 @@ public class InterfaceAV extends javax.swing.JFrame {
     DateFormat df= DateFormat.getDateInstance();
     public InterfaceAV() {
         initComponents();
-//        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
 //        setSize(450, 450);
 //        setTitle("Audiovisual");
 //        setIconImage(new ImageIcon(getClass().getResource("/images/images.jpg")).getImage());
@@ -83,6 +84,7 @@ public class InterfaceAV extends javax.swing.JFrame {
         unavailableConect = new javax.swing.JRadioButton();
         positiveBth = new javax.swing.JRadioButton();
         negativeBth = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,13 +97,13 @@ public class InterfaceAV extends javax.swing.JFrame {
 
         jLabel1.setText("Dispositivo: ");
 
-        dispositiveName.setVisible(false);
+        dispositiveName.setEditable(false);
 
         jLabel3.setText("Marca:        ");
 
-        registerNumber.setVisible(false);
+        registerNumber.setEditable(false);
 
-        brandName.setVisible(false);
+        brandName.setEditable(false);
 
         jLabel4.setText("Numero de registro: ");
 
@@ -115,7 +117,7 @@ public class InterfaceAV extends javax.swing.JFrame {
 
         jLabel7.setText("Sistema operativo:");
 
-        operativeSystem.setVisible(false);
+        operativeSystem.setEditable(false);
 
         jLabel8.setText("Conexión inalámbrica: ");
 
@@ -123,9 +125,9 @@ public class InterfaceAV extends javax.swing.JFrame {
 
         jLabel10.setText("Contenido:");
 
-        contentField.setVisible(false);
+        contentField.setEditable(false);;
 
-        registerButton.setBackground(new java.awt.Color(153, 0, 204));
+        registerButton.setBackground(Color.CYAN);
         registerButton.setText("Registrar");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +181,13 @@ public class InterfaceAV extends javax.swing.JFrame {
         negativeBth.setVisible(false);
         buttonGroup4.add(negativeBth);
         negativeBth.setText("No");
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -240,12 +249,14 @@ public class InterfaceAV extends javax.swing.JFrame {
                                     .addComponent(negativeBth)
                                     .addComponent(unavailableConect))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
                         .addComponent(contentField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                        .addComponent(registerButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(registerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(35, 35, 35))))
         );
         layout.setVerticalGroup(
@@ -299,7 +310,9 @@ public class InterfaceAV extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(contentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -386,6 +399,10 @@ public class InterfaceAV extends javax.swing.JFrame {
 
     }//GEN-LAST:event_availableConectActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -434,6 +451,7 @@ public class InterfaceAV extends javax.swing.JFrame {
     private javax.swing.JRadioButton disponible;
     private javax.swing.JTextField dispositiveName;
     private javax.swing.JRadioButton goodCondition;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -455,9 +473,9 @@ public class InterfaceAV extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     public void invisible(){
-        dispositiveName.setVisible(true);
-        brandName.setVisible(true);
-        registerNumber.setVisible(true);
+        dispositiveName.setEditable(true);
+        brandName.setEditable(true);
+        registerNumber.setEditable(true);
         dateRegister.setVisible(true);
         goodCondition.setVisible(true);
         badCondition.setVisible(true);
@@ -467,36 +485,50 @@ public class InterfaceAV extends javax.swing.JFrame {
     
     public void visibleAV(int index){
         if(index==0){
-            operativeSystem.setVisible(true);
-            contentField.setVisible(false);
+            dispositiveName.setText("Laptop");
+            dispositiveName.setEditable(false);
+            operativeSystem.setEditable(true);
+            contentField.setEditable(false);
             availableConect.setVisible(false);
             unavailableConect.setVisible(false);
             positiveBth.setVisible(false);
             negativeBth.setVisible(false);
         }
         if(index==1){
-            operativeSystem.setVisible(false);
-            contentField.setVisible(false);
+            dispositiveName.setText("Proyector");
+            dispositiveName.setEditable(false);
+            operativeSystem.setEditable(false);
+            contentField.setEditable(false);
             availableConect.setVisible(true);
             unavailableConect.setVisible(true);
             positiveBth.setVisible(false);
             negativeBth.setVisible(false);
         }
         if(index==2){
-            operativeSystem.setVisible(false);
+            dispositiveName.setText("Parlantes");
+            dispositiveName.setEditable(false);
+            operativeSystem.setEditable(false);
+            contentField.setEditable(false);
             availableConect.setVisible(false);
             unavailableConect.setVisible(false);
             positiveBth.setVisible(true);
             negativeBth.setVisible(true);
-            contentField.setVisible(false);
         }
         if(index>=3){
-            operativeSystem.setVisible(false);
+            operativeSystem.setEditable(false);
+            contentField.setEditable(false);
             availableConect.setVisible(false);
             unavailableConect.setVisible(false);
             positiveBth.setVisible(false);
             negativeBth.setVisible(false);
-            contentField.setVisible(true);
+            contentField.setEditable(true);
+            if(index==3){
+                dispositiveName.setText("Cd's");
+                dispositiveName.setEditable(false);
+            }else{
+                dispositiveName.setText("Dvd's");
+                dispositiveName.setEditable(false);
+            }
         }
     }
     
@@ -506,6 +538,7 @@ public class InterfaceAV extends javax.swing.JFrame {
         if(dispositiveName.getText().equals("") ||
                 brandName.getText().equals("") ||
                 registerNumber.getText().equals("") ||
+                registerNumber.getText().length()!=5 ||
                 buttonGroup1.isSelected(null)==true ||
                 buttonGroup2.isSelected(null)==true ||
                 dateRegister.getDate()==null){
