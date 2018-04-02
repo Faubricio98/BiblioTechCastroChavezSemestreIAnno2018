@@ -212,5 +212,131 @@ public class AvFile{
         return success;
     }
     
+    public Audiovisuales getAVByRegisterNumber(int registerNumber, int type)throws IOException{
+        if(type==0){
+            for(int i=0; i<this.regsQuantity; i++){
+                Laptop myLaptop=new Laptop();
+                randomAF.seek(i*this.regsSize);
+                setDefaultAtributes(myLaptop);
+                if(myLaptop.getRegisterNumber()==registerNumber){
+                    myLaptop.setOperativeSys(randomAF.readUTF());
+                    return myLaptop;
+                }//if de validación de numero de registro
+            }//fin for type 0
+        }else{
+            if(type==1){
+                for(int i=0; i<this.regsQuantity; i++){
+                    Proyector myProyector=new Proyector();
+                    randomAF.seek(i*this.regsSize);
+                    setDefaultAtributes(myProyector);
+                    if(myProyector.getRegisterNumber()==registerNumber){
+                        myProyector.setWireless(randomAF.readBoolean());
+                        return myProyector;
+                    }//if de validación de numero de registro
+                }//fin for type 1
+            }else{
+                if(type==2){
+                    for(int i=0; i<this.regsQuantity;i++){
+                        Parlantes myParlantes=new Parlantes();
+                        randomAF.seek(i*this.regsSize);
+                        setDefaultAtributes(myParlantes);
+                        if(myParlantes.getRegisterNumber()==registerNumber){
+                            myParlantes.setBluethoot(randomAF.readBoolean());
+                            return myParlantes;
+                        }//fin if de validación
+                    }//fin for type 2
+                }else{
+                    if(type==3){
+                        for(int i=0; i<this.regsQuantity; i++){
+                            Cds myCds=new Cds();
+                            randomAF.seek(i*this.regsSize);
+                            setDefaultAtributes(myCds);
+                            if(myCds.getRegisterNumber()==registerNumber){
+                                myCds.setContentInfo(randomAF.readUTF());
+                                return myCds;
+                            }//fin if de validación
+                        }//fin for type 3
+                    }else{
+                        if(type==3){
+                            for(int i=0; i<this.regsQuantity; i++){
+                                Dvds myDvds=new Dvds();
+                                randomAF.seek(i*this.regsSize);
+                                setDefaultAtributes(myDvds);
+                                if(myDvds.getRegisterNumber()==registerNumber){
+                                    myDvds.setContentInfo(randomAF.readUTF());
+                                    return myDvds;
+                                }//fin if de validación
+                            }//fin for type 3
+                        }else{
+                            return null;
+                        }//if de type 4
+                    }//if de type 3
+                }//if de type 2
+            }//if de type 1
+        }//fin if type 0
+        if(type>4){
+            return null;
+        }else{
+            return null;
+        }
+    }
+    
+    public void setDefaultAtributes(Audiovisuales aud)throws IOException{
+        aud.setDispositive(randomAF.readUTF());
+        aud.setBrand(randomAF.readUTF());
+        aud.setRegisterNumber(randomAF.readInt());
+        aud.setCondition(randomAF.readBoolean());
+        aud.setEntryDate(randomAF.readUTF());
+        aud.setAvailability(randomAF.readBoolean());
+    }
+    
+    public void setAvailability(int registerNumber, boolean availability, Audiovisuales aud, int type)throws IOException{
+        aud.setAvailability(availability);
+        if(type==0){
+            Laptop lap=new Laptop();
+            for(int i=0; i<this.regsQuantity; i++){
+                lap=(Laptop) aud;
+                if(lap.getRegisterNumber()==registerNumber){
+                    putValueForLaptop(i, lap);
+                }
+            }
+        }//fin if type 0
+        if(type==1){
+            Proyector pro=new Proyector();
+            for(int i=0; i<this.regsQuantity; i++){
+                pro=(Proyector) aud;
+                if(pro.getRegisterNumber()==registerNumber){
+                    putValueForProyector(i, pro);
+                }
+            }
+        }//fin if type 1
+        if(type==2){
+            Parlantes par=new Parlantes();
+            for(int i=0; i<this.regsQuantity; i++){
+                par=(Parlantes) aud;
+                if(par.getRegisterNumber()==registerNumber){
+                    putValueForParlantes(i, par);
+                }
+            }
+        }//fin if type 2
+        if(type==3){
+            Cds cds=new Cds();
+            for(int i=0; i<this.regsQuantity; i++){
+                cds=(Cds) aud;
+                if(cds.getRegisterNumber()==registerNumber){
+                    putValueForCds(i, cds);
+                }
+            }
+        }//fin if type 3
+        if(type==4){
+            Dvds dvds=new Dvds();
+            for(int i=0; i<this.regsQuantity; i++){
+                dvds=(Dvds) aud;
+                if(dvds.getRegisterNumber()==registerNumber){
+                    putValueForDvd(i, dvds);
+                }
+            }
+        }//fin if type 4
+    }
     
 }//fin clase
