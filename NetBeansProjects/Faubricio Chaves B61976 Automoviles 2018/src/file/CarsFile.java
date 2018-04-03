@@ -260,6 +260,7 @@ public class CarsFile {
             myCar.setAmerican(cars.get(i).isAmerican());
             myCar.setSerie(cars.get(i).getSerie());
             putValue(i, myCar);
+            //hola
         }//escribirá el archivo
     }
 }
