@@ -16,6 +16,7 @@ public class IncompleteDate extends javax.swing.JFrame {
      */
     public IncompleteDate() {
         initComponents();
+        //
     }
 
     /**

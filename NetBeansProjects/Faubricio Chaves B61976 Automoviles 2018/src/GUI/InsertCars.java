@@ -310,6 +310,7 @@ public class InsertCars extends javax.swing.JFrame {
                     limpiaEspacios();
                     carFile.compressFile(carFile.getAllCars());
                     serieField.setEditable(true);
+                    //
                 }else{
                     System.out.println("El registro ya había sido eliminado");
                     limpiaEspacios();

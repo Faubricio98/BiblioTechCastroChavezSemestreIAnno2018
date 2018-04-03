@@ -112,6 +112,7 @@ public class MDI extends javax.swing.JFrame {
             ArrayList<Cars> carsArray=carFile.getAllCars();
             String text="";
             //recorrido del array
+            //
             for(int i=0; i<arraySize;i++){
                 text="Nombre: "+carsArray.get(i).getName()+
                         "\nAño: "+carsArray.get(i).getYear()+

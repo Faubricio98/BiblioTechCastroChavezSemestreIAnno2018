@@ -8,6 +8,7 @@ package domain;
 /**
  *
  * @author faubricioch
+ * 
  */
 public class Cars {
     private String name;
