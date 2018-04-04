@@ -41,10 +41,6 @@ public class InterfaceST extends javax.swing.JFrame {
         cargaDatos();
         actualizar();
     }
-    public void escribir(String texto)
-    {
-        JOptionPane.showMessageDialog(this, texto);
-    }
     public void cargaDatos()
     {
         try{
@@ -56,7 +52,7 @@ public class InterfaceST extends javax.swing.JFrame {
                 in.close();
             }
         }catch(Exception ex){
-            escribir(ex.getMessage());
+            jLabel1.setText(ex.getMessage());
         }   
     }
     
@@ -103,6 +99,7 @@ public class InterfaceST extends javax.swing.JFrame {
         jLabelcarnet2 = new javax.swing.JLabel();
         jButtonR = new javax.swing.JButton();
         jButtonB = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,27 +153,32 @@ public class InterfaceST extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCareer)
-                    .addComponent(jLabelCarnet)
-                    .addComponent(jLabelYear, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldN, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboCareer, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelcarnet2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonB))
-                    .addComponent(jTextFieldY, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonR)
                 .addGap(44, 44, 44))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelCareer)
+                            .addComponent(jLabelCarnet)
+                            .addComponent(jLabelYear, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldN, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboCareer, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelcarnet2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonB))
+                            .addComponent(jTextFieldY, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +203,9 @@ public class InterfaceST extends javax.swing.JFrame {
                         .addComponent(jLabelCarnet)
                         .addComponent(jLabelcarnet2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButtonB))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -283,6 +287,7 @@ public class InterfaceST extends javax.swing.JFrame {
     private javax.swing.JButton jButtonB;
     private javax.swing.JButton jButtonR;
     private javax.swing.JComboBox<String> jComboCareer;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCareer;
     private javax.swing.JLabel jLabelCarnet;
     private javax.swing.JLabel jLabelName;
@@ -301,11 +306,17 @@ public class InterfaceST extends javax.swing.JFrame {
         String Digit=jTextFieldY.getText();
         String finalDigit=Digit.substring(Digit.length()-1);
         Student s = new Student();
-        String carnet="";
+        String carnet="", ze="";
         int num, a, e, i;
         String n = jTextFieldN.getText();
         int y = Integer.parseInt(jTextFieldY.getText());
         String c = jComboCareer.getSelectedItem().toString();
+        if(aS.getSize()<10){
+            ze+="00";
+        }else if(aS.getSize()>10 &&aS.getSize()<100){
+            ze+="0";
+        } else{
+        }
 
         if(jComboCareer.getSelectedIndex()==0){
             Digit=jComboCareer.getSelectedItem().toString();
@@ -313,7 +324,7 @@ public class InterfaceST extends javax.swing.JFrame {
             e=s.getEdu();
             i=s.getInf();
             
-            carnet+="A"+finalDigit+a;
+            carnet+="A"+finalDigit+ze+a;
          }
          else{ if(jComboCareer.getSelectedIndex()==1){
             Digit=jComboCareer.getSelectedItem().toString();
@@ -321,20 +332,20 @@ public class InterfaceST extends javax.swing.JFrame {
             e=aS.getSize()+1;
             i=s.getInf();
             num=s.getEdu();            
-            carnet+="E"+finalDigit+e;
+            carnet+="E"+finalDigit+ze+e;
          }else{
             Digit=jComboCareer.getSelectedItem().toString();
             a=s.getAgro();
             e=s.getEdu();
             i=aS.getSize()+1;
-            carnet+="I"+finalDigit+i;
+            carnet+="I"+finalDigit+ze+i;
             }
          }
         jLabelcarnet2.setText(carnet);
         
         open = new Student(carnet, n, Digit, a, e, i, y);
             if(aS.search(open.getCarnet()) != -1){
-                escribir("El codigo del empleado ya existe");
+              jLabel1.setText("El codigo del alumno ya existe");
                 
             }else{
                 aS.add(open);
