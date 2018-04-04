@@ -14,6 +14,7 @@ import domain.Proyector;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 
 public class BFile {
@@ -183,5 +184,5 @@ public class BFile {
             }
         }//fin if type 1
     }//fin set aviability
-        
+    
 }//end class
