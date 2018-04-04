@@ -66,6 +66,7 @@ public class Loan extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         actionCombo = new javax.swing.JComboBox();
+        multa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +130,14 @@ public class Loan extends javax.swing.JFrame {
         });
 
         actionCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Loan", "Devolution" }));
+        actionCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actionComboActionPerformed(evt);
+            }
+        });
+
+        multa.setText("Multa:");
+        multa.setVisible(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,15 +154,14 @@ public class Loan extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel1)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(dispField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(brandField)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(dispField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(brandField))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(18, 18, 18)
@@ -186,14 +194,18 @@ public class Loan extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(actionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
-                        .addComponent(dispositiveCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dispositiveCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(multa)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dispositiveCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(dispositiveCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(multa))
                     .addComponent(actionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -276,7 +288,7 @@ public class Loan extends javax.swing.JFrame {
                 Logger.getLogger(Loan.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
-            if(validaRN()==1 && actionCombo.getSelectedIndex()==1){
+            if(actionCombo.getSelectedIndex()==1){
                 try {
                     Audiovisuales aud=new Audiovisuales();
                     File file=new File("./AvFile.dat");
@@ -298,13 +310,16 @@ public class Loan extends javax.swing.JFrame {
                         if(aud.isAvailability()==true){
                             avaY.setSelected(true);
                         }else{
-                            avaN.setSelected(false);
+                            avaN.setSelected(true);
                         }//ifs internos
                     }//if externo
                     
                 } catch (IOException ex) {
                     Logger.getLogger(Loan.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }else{
+                IncompleteData inData=new IncompleteData();
+                inData.setVisible(true);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -382,11 +397,108 @@ public class Loan extends javax.swing.JFrame {
                 
                 avLoan.addEndRecord(lCav);
                 setBlanc();
+            }else{
+                if(actionCombo.getSelectedIndex()==1){
+                    int index=dispositiveCombo.getSelectedIndex();
+                    File file=new File("./LoanFile.dat");
+                    File fileAv=new File("./AvFile.dat");
+                    AvFile avFile=new AvFile(fileAv);
+                    LoanAv avLoan=new LoanAv(file);
+                    LoanCAv lCav=new LoanCAv();
+
+                    if(index==0){
+                        Laptop lap=new Laptop();
+                        lap=(Laptop) avFile.getAVByRegisterNumber(Integer.parseInt(regNumber.getText()),
+                                index);
+                        lap.setAvailability(false);
+                        avFile.setAvailability(Integer.parseInt(regNumber.getText()),
+                                askAvailability(), lap, index);
+                    }
+                    if(index==1){
+                        Proyector pro=new Proyector();
+                        pro=(Proyector) avFile.getAVByRegisterNumber(Integer.parseInt(regNumber.getText()),
+                                index);
+                        pro.setAvailability(askAvailability());
+                        avFile.setAvailability(Integer.parseInt(regNumber.getText()),
+                                askAvailability(), pro, index);
+                    }
+                    if(index==2){
+                        Parlantes par=new Parlantes();
+                        par=(Parlantes) avFile.getAVByRegisterNumber(Integer.parseInt(regNumber.getText()),
+                                index);
+                        par.setAvailability(askAvailability());
+                        avFile.setAvailability(Integer.parseInt(regNumber.getText()),
+                                askAvailability(), par, index);
+                    }
+                    if(index==3){
+                        Cds cds=new Cds();
+                        cds=(Cds) avFile.getAVByRegisterNumber(Integer.parseInt(regNumber.getText()),
+                                index);
+                        cds.setAvailability(askAvailability());
+                        avFile.setAvailability(Integer.parseInt(regNumber.getText()),
+                                askAvailability(), cds, index);
+                    }
+                    if(index==4){
+                        Dvds dvds=new Dvds();
+                        dvds=(Dvds) avFile.getAVByRegisterNumber(Integer.parseInt(regNumber.getText()),
+                                index);
+                        dvds.setAvailability(askAvailability());
+                        avFile.setAvailability(Integer.parseInt(regNumber.getText()),
+                                askAvailability(), dvds, index);
+                    }
+                    lCav=avLoan.getLoanByRegNumber(Integer.parseInt(regNumber.getText()));
+                    if(lCav.getBackLoanDate().equals(df.format(returnDate.getDate()))){
+                        multa.setText("Multa: 0");
+                    }else{
+                        int s1, s2, s3, s4, pay=0;
+                        String date=lCav.getBackLoanDate();
+                        String[]d1, d2;
+                        String compare=df.format(returnDate.getDate());
+                        
+                        d1=date.split("/");
+                        d2=compare.split("/");
+                        
+                        s1=Integer.parseInt(d1[0]);
+                        s2=Integer.parseInt(d2[0]);
+                        s3=Integer.parseInt(d1[1]);
+                        s4=Integer.parseInt(d2[1]);
+                        System.out.println(s1+" "+ s3+" "+s2+" "+ s4);
+                        System.out.println(pay);
+                        if(s3<s4){
+                            for(int i=0; s3<s4; i++){
+                                pay=pay+30;
+                                s3++;
+                            }//control meses
+                        }else{
+                            pay=0;
+                        }
+                        System.out.println(pay);
+                        if(s1<s2){
+                            for(int j=0; s1<s2; j++){
+                                pay++;
+                                s1++;
+                                System.out.println(pay);
+                            }//controla días
+                        }else{
+                            pay=pay+s2;
+                        }
+                        multa.setText("Multa: "+pay*100);
+                    }
+                    avLoan.deleteLoan(Integer.parseInt(regNumber.getText()));
+                    setBlanc();
+                }
             }
         }catch(IOException e){
         
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void actionComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionComboActionPerformed
+        if(actionCombo.getSelectedIndex()==1){
+            loadDate.setEnabled(false);
+            multa.setVisible(true);
+        }
+    }//GEN-LAST:event_actionComboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -445,6 +557,7 @@ public class Loan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private com.toedter.calendar.JDateChooser loadDate;
+    private javax.swing.JLabel multa;
     private javax.swing.JTextField regNumber;
     private com.toedter.calendar.JDateChooser returnDate;
     // End of variables declaration//GEN-END:variables
@@ -463,7 +576,6 @@ public class Loan extends javax.swing.JFrame {
     }
     
     public boolean askAvailability(){
-        System.out.println(avaY.isSelected());
         if(avaY.isSelected()==false){
             return false;
         }else{

@@ -35,14 +35,14 @@ public class InterfaceAV extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 //        setSize(450, 450);
-//        setTitle("Audiovisual");
-//        setIconImage(new ImageIcon(getClass().getResource("/images/images.jpg")).getImage());
-//        ((JPanel)getContentPane()).setOpaque(false);
-//        ImageIcon uno=new ImageIcon(this.getClass().getResource("/images/audiovisuales.jpg"));
-//        JLabel fondo=new JLabel();
-//        fondo.setIcon(uno);
-//        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
-//        fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
+        setTitle("Audiovisual");
+        //setIconImage(new ImageIcon(getClass().getResource("/images/multimedia.png")).getImage());
+        ((JPanel)getContentPane()).setOpaque(false);
+        ImageIcon uno=new ImageIcon(this.getClass().getResource("/images/audiovisuales.jpg"));
+        JLabel fondo=new JLabel();
+        fondo.setIcon(uno);
+        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
     }
 
     /**
@@ -96,7 +96,7 @@ public class InterfaceAV extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Dispositivo: ");
+        jLabel1.setText("Device");
 
         dispositiveName.setEditable(false);
         dispositiveName.addActionListener(new java.awt.event.ActionListener() {
@@ -105,36 +105,37 @@ public class InterfaceAV extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Marca:        ");
+        jLabel3.setText("Brand");
 
         registerNumber.setEditable(false);
 
         brandName.setEditable(false);
 
-        jLabel4.setText("Numero de registro: ");
+        jLabel4.setText("Register Number");
 
-        jLabel5.setText("Condición: ");
+        jLabel5.setText("Condition: ");
 
         dateRegister.setVisible(false);
 
-        jLabel2.setText("Fecha de registro: ");
+        jLabel2.setText("Entry Date");
 
-        jLabel6.setText("Disponibilidad:");
+        jLabel6.setText("Availability");
 
-        jLabel7.setText("Sistema operativo:");
+        jLabel7.setText("Operative System");
 
         operativeSystem.setEditable(false);
 
-        jLabel8.setText("Conexión inalámbrica: ");
+        jLabel8.setText("Wireless Connection");
 
-        jLabel9.setText("Conexión bluetooth: ");
+        jLabel9.setText("Bluetooth Conection ");
 
-        jLabel10.setText("Contenido:");
+        jLabel10.setText("Content");
 
         contentField.setEditable(false);;
 
-        registerButton.setBackground(Color.CYAN);
-        registerButton.setText("Registrar");
+        registerButton.setBackground(new java.awt.Color(102, 102, 255));
+        registerButton.setForeground(new java.awt.Color(255, 255, 255));
+        registerButton.setText("Register");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerButtonActionPerformed(evt);
@@ -143,7 +144,7 @@ public class InterfaceAV extends javax.swing.JFrame {
 
         goodCondition.setVisible(false);
         buttonGroup2.add(goodCondition);
-        goodCondition.setText("Buena");
+        goodCondition.setText("God");
         goodCondition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goodConditionActionPerformed(evt);
@@ -152,7 +153,7 @@ public class InterfaceAV extends javax.swing.JFrame {
 
         badCondition.setVisible(false);
         buttonGroup2.add(badCondition);
-        badCondition.setText("Mala");
+        badCondition.setText("Bad");
         badCondition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 badConditionActionPerformed(evt);
@@ -161,15 +162,20 @@ public class InterfaceAV extends javax.swing.JFrame {
 
         disponible.setVisible(false);
         buttonGroup1.add(disponible);
-        disponible.setText("Si");
+        disponible.setText("Yes");
 
         noDisponible.setVisible(false);
         buttonGroup1.add(noDisponible);
         noDisponible.setText("No");
+        noDisponible.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noDisponibleActionPerformed(evt);
+            }
+        });
 
         availableConect.setVisible(false);
         buttonGroup3.add(availableConect);
-        availableConect.setText("Si");
+        availableConect.setText("Yes");
         availableConect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 availableConectActionPerformed(evt);
@@ -182,13 +188,19 @@ public class InterfaceAV extends javax.swing.JFrame {
 
         positiveBth.setVisible(false);
         buttonGroup4.add(positiveBth);
-        positiveBth.setText("Si");
+        positiveBth.setText("Yes");
+        positiveBth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                positiveBthActionPerformed(evt);
+            }
+        });
 
         negativeBth.setVisible(false);
         buttonGroup4.add(negativeBth);
         negativeBth.setText("No");
 
-        jButton1.setText("Salir");
+        jButton1.setBackground(new java.awt.Color(102, 102, 255));
+        jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -258,12 +270,12 @@ public class InterfaceAV extends javax.swing.JFrame {
                                         .addComponent(noDisponible)))
                                 .addGap(66, 66, 66)
                                 .addComponent(jLabelMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(55, Short.MAX_VALUE))
+                        .addContainerGap(94, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
                         .addComponent(contentField, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(registerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -422,6 +434,14 @@ public class InterfaceAV extends javax.swing.JFrame {
     private void dispositiveNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dispositiveNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dispositiveNameActionPerformed
+
+    private void noDisponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noDisponibleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noDisponibleActionPerformed
+
+    private void positiveBthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positiveBthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_positiveBthActionPerformed
 
     /**
      * @param args the command line arguments

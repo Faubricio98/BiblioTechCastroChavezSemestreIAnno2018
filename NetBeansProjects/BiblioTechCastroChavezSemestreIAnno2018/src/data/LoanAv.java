@@ -95,7 +95,7 @@ public class LoanAv {
             loan.setRegisterNumber(randomAF.readInt());
             
             if(loan.getRegisterNumber()!=registerNumber){
-                //vacio
+                //;
             }else{
                 return loan;
             }
