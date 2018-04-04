@@ -19,28 +19,27 @@ import javax.swing.JOptionPane;
 
 public class InterfaceCH extends javax.swing.JFrame {
     InterfaceST st= new InterfaceST();
-    DefaultTableModel miModelo;
+    DefaultTableModel miModel;
     Student open;
     aStudent aS;
-    String[] cabecera={"NAME","CARNET","CAREER","YEAR OF INCOME"};
+    String[] headboard={"NAME","CARNET","CAREER","YEAR OF INCOME"};
     String[][] data={};
     
     
     public InterfaceCH() {
         initComponents();
         setLocationRelativeTo(null);
-        miModelo = new DefaultTableModel(data,cabecera);
-        jtable.setModel(miModelo);
+        miModel = new DefaultTableModel(data,headboard);
+        jtable.setModel(miModel);
         aS = new aStudent();
-        cargaDatos();
-        actualizar();
-    }
-    public void escribir(String texto)
-    {
-        JOptionPane.showMessageDialog(this, texto);
+        loadData();
+        update();
+        jButtonBooks.setVisible(false);
+        jButtonAudiovisuals.setVisible(false);
     }
     
-    public void cargaDatos()
+    
+    public void loadData()
     {
         try{
             FileInputStream fis = new FileInputStream("Student.ser");
@@ -51,19 +50,19 @@ public class InterfaceCH extends javax.swing.JFrame {
                 in.close();
             }
         }catch(Exception ex){
-            escribir(ex.getMessage());
+            
         }   
     }
     
     
-    public void vaciar_tabla(){
+    public void clearTable(){
         int n = jtable.getRowCount();
         for(int p=0;p<n;p++){
-            miModelo.removeRow(0);
+            miModel.removeRow(0);
         }
     }
-    public void actualizar(){
-        vaciar_tabla();
+    public void update(){
+        clearTable();
         int num = aS.getSize();
         for(int p=0; p<num; p++){
             open = aS.getStudent(p);
@@ -71,48 +70,37 @@ public class InterfaceCH extends javax.swing.JFrame {
             String n = open.getName();
             String career=open.getCareer();
             int y = open.getYear();
-            insertar(n, carnet, career, y);
+            insert(n, carnet, career, y);
         }
     }
     
-    public void insertar(String name,String carnet,String career, int year){
+    public void insert(String name,String carnet,String career, int year){
         String n = name;
         String carne=carnet;
         String caree = career;
         int y = year;
         Object[] fila={n, carne, caree, y};
-        miModelo.addRow(fila);
+        miModel.addRow(fila);
     }
-     public void m_consultar(){
+     public void consult(){
         String co=jTextFieldS.getText();
         int p = aS.search(co);
         
        
         if(p == -1){
-            escribir("Codigo no existe");
+            jLabelMessage.setText("Codigo no existe");
             
         }else{
-            escribir("Bienvenido");
-            //aS.saveStudent(p);
-            new InterfaceAB().setVisible(true);
-            dispose();
+            jLabelMessage.setText("Bienvenido");
+            aS.saveStudent(aS.getStudent(p));
+            jButtonBooks.setVisible(true);
+            jButtonAudiovisuals.setVisible(true);
+            
         }
      }
-    public  void m_modificar(){
-            m_consultar();
-//            int n = aS.getSize();
-//            for(int p=0;p<n;p++){
-//                open = aS.getStudent(p);
-//                String carnet=jTextFieldS.getText();
-//                if(carnet==(open.getCarnet())){
-//                    new InterfaceAB().setVisible(true);
-//                    dispose();
-//                }else{
-//                    escribir("No existe el carnet");
-//                    break;
-//                }
-//                
-//            }
+    public  void change(){
+            consult();
+
         }
     
      
@@ -126,6 +114,9 @@ public class InterfaceCH extends javax.swing.JFrame {
         jTextFieldS = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtable = new javax.swing.JTable();
+        jButtonBooks = new javax.swing.JButton();
+        jButtonAudiovisuals = new javax.swing.JButton();
+        jLabelMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,48 +147,86 @@ public class InterfaceCH extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jtable);
 
+        jButtonBooks.setText("Books");
+        jButtonBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBooksActionPerformed(evt);
+            }
+        });
+
+        jButtonAudiovisuals.setText("Audiovisuals");
+        jButtonAudiovisuals.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAudiovisualsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jButtonS)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jButtonR))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldS, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(83, 83, 83)
+                                .addComponent(jButtonBooks)
+                                .addGap(85, 85, 85)
+                                .addComponent(jButtonR)
+                                .addGap(64, 64, 64)
+                                .addComponent(jButtonAudiovisuals))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(173, 173, 173)
+                                .addComponent(jLabelMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonS)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldS, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonS)
                     .addComponent(jTextFieldS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addComponent(jButtonR)
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonR)
+                    .addComponent(jButtonAudiovisuals)
+                    .addComponent(jButtonBooks))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSActionPerformed
-        m_modificar();
+        change();
     }//GEN-LAST:event_jButtonSActionPerformed
 
     private void jButtonRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonRActionPerformed
+
+    private void jButtonBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBooksActionPerformed
+        new InterfaceLB().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonBooksActionPerformed
+
+    private void jButtonAudiovisualsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAudiovisualsActionPerformed
+        new InterfaceLV().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonAudiovisualsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,8 +264,11 @@ public class InterfaceCH extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAudiovisuals;
+    private javax.swing.JButton jButtonBooks;
     private javax.swing.JButton jButtonR;
     private javax.swing.JButton jButtonS;
+    private javax.swing.JLabel jLabelMessage;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextFieldS;
     private javax.swing.JTable jtable;

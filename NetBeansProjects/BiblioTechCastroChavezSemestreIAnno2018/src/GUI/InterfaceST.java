@@ -6,6 +6,7 @@
 package GUI;
 import domain.Student;
 import GUI.IncompleteData;
+import GUI.InterfaceAV;
 import data.aStudent;
 import domain.Audiovisuales;
 import java.io.FileInputStream;
@@ -26,22 +27,19 @@ import javax.swing.table.DefaultTableModel;
 public class InterfaceST extends javax.swing.JFrame {
 
     
-    int agron=0;
-    int educ=0;
-    int infor=0;
+
     Student open;
     aStudent aS;
-    
     int cont=0;
     
     public InterfaceST() {
         initComponents();
         setLocationRelativeTo(null);
         aS = new aStudent();
-        cargaDatos();
-        actualizar();
+        loadData();
+        update();
     }
-    public void cargaDatos()
+    public void loadData()
     {
         try{
             FileInputStream fis = new FileInputStream("Student.ser");
@@ -56,7 +54,7 @@ public class InterfaceST extends javax.swing.JFrame {
         }   
     }
     
-    public void grabar() 
+    public void record() 
     {
         try{
             FileOutputStream fos = new FileOutputStream("Student.ser");
@@ -69,7 +67,7 @@ public class InterfaceST extends javax.swing.JFrame {
             
         }
     }
-    public void actualizar(){
+    public void update(){
         
         int num = aS.getSize();
         for(int p=0; p<num; p++){
@@ -235,7 +233,7 @@ public class InterfaceST extends javax.swing.JFrame {
 
     private void jButtonRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRActionPerformed
         try {
-            this.m_guardar();
+            this.save();
         } catch (IOException ex) {
             Logger.getLogger(InterfaceST.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -296,13 +294,13 @@ public class InterfaceST extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldN;
     private javax.swing.JTextField jTextFieldY;
     // End of variables declaration//GEN-END:variables
-    public void limpiar(){
+    public void clean(){
         jTextFieldN.setText("");
         jTextFieldY.setText("");
         
     }
     
-    public void m_guardar() throws IOException{
+    public void save() throws IOException{
         String Digit=jTextFieldY.getText();
         String finalDigit=Digit.substring(Digit.length()-1);
         Student s = new Student();
@@ -350,10 +348,11 @@ public class InterfaceST extends javax.swing.JFrame {
             }else{
                 aS.add(open);
                 
-                grabar();
-                actualizar();
-                limpiar();
+                record();
+                update();
+                clean();
            } 
-        }
+    }
 }
+
 

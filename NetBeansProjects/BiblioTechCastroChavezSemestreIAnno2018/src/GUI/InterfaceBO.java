@@ -27,11 +27,11 @@ public class InterfaceBO extends javax.swing.JFrame {
         setTitle("Books");
         setIconImage(new ImageIcon(getClass().getResource("/images/images.jpg")).getImage());
         ((JPanel)getContentPane()).setOpaque(false);
-        ImageIcon uno=new ImageIcon(this.getClass().getResource("/images/biblioteca.jpg"));
-        JLabel fondo=new JLabel();
-        fondo.setIcon(uno);
-        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
-        fondo.setBounds(0,0,uno.getIconWidth(),uno.getIconHeight());
+        ImageIcon one=new ImageIcon(this.getClass().getResource("/images/biblioteca.jpg"));
+        JLabel background=new JLabel();
+        background.setIcon(one);
+        getLayeredPane().add(background, JLayeredPane.FRAME_CONTENT_LAYER);
+        background.setBounds(0,0,one.getIconWidth(),one.getIconHeight());
         
     }
 
@@ -60,6 +60,7 @@ public class InterfaceBO extends javax.swing.JFrame {
         jLabelSheets = new javax.swing.JLabel();
         jTextFieldSheets = new javax.swing.JTextField();
         jButtonExit = new javax.swing.JButton();
+        jLabelMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -89,7 +90,7 @@ public class InterfaceBO extends javax.swing.JFrame {
         getContentPane().add(jComboBooks);
         jComboBooks.setBounds(80, 20, 100, 20);
         getContentPane().add(lblType);
-        lblType.setBounds(220, 20, 190, 30);
+        lblType.setBounds(220, 10, 190, 30);
 
         jLabelYear.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabelYear.setText("Year");
@@ -143,6 +144,11 @@ public class InterfaceBO extends javax.swing.JFrame {
         jTextISBN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextISBNActionPerformed(evt);
+            }
+        });
+        jTextISBN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextISBNKeyTyped(evt);
             }
         });
         getContentPane().add(jTextISBN);
@@ -204,6 +210,8 @@ public class InterfaceBO extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonExit);
         jButtonExit.setBounds(290, 170, 90, 30);
+        getContentPane().add(jLabelMessage);
+        jLabelMessage.setBounds(300, 40, 80, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -275,7 +283,7 @@ public class InterfaceBO extends javax.swing.JFrame {
         jTextFieldFormat.setText("");
         jTextFieldSheets.setText("");
         jTextFieldStorage.setText("");
-        JOptionPane.showMessageDialog(null, "Datos registrados");
+        jLabelMessage.setText("Datos registrados");
         }catch(Exception ex){
             
         }
@@ -296,6 +304,13 @@ public class InterfaceBO extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_jButtonExitActionPerformed
+
+    private void jTextISBNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextISBNKeyTyped
+        int limit=20;//limita la cantidad de caracteres
+        if(jTextISBN.getText().length()>=limit){
+            evt.consume();//no deja ingresar más caracteres
+        }
+    }//GEN-LAST:event_jTextISBNKeyTyped
 
     /**
      * @param args the command line arguments
@@ -341,6 +356,7 @@ public class InterfaceBO extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCover;
     private javax.swing.JLabel jLabelFormat;
     private javax.swing.JLabel jLabelISBN;
+    private javax.swing.JLabel jLabelMessage;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelSheets;
     private javax.swing.JLabel jLabelStorage;
@@ -397,6 +413,7 @@ public class InterfaceBO extends javax.swing.JFrame {
                 jTextAuthor.getText().equals("") ||
                 jTextAuthor.getText().equals("") ||
                 jTextISBN.getText().equals("") ||
+                jTextISBN.getText().length()!=10 ||
                 jTextYear.getText().equals("")){
                
             control=0;
