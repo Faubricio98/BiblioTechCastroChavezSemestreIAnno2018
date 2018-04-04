@@ -215,7 +215,9 @@ public class InterfaceCH extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSActionPerformed
 
     private void jButtonRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRActionPerformed
-        dispose();
+        MDI mdi=new MDI();
+        mdi.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonRActionPerformed
 
     private void jButtonBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBooksActionPerformed
@@ -224,8 +226,8 @@ public class InterfaceCH extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBooksActionPerformed
 
     private void jButtonAudiovisualsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAudiovisualsActionPerformed
-        new InterfaceLV().setVisible(true);
-        dispose();
+        Loan loan=new Loan();
+        loan.setVisible(true);
     }//GEN-LAST:event_jButtonAudiovisualsActionPerformed
 
     /**

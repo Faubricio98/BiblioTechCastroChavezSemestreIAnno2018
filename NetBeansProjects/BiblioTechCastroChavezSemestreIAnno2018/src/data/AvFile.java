@@ -291,52 +291,84 @@ public class AvFile{
     }
     
     public void setAvailability(int registerNumber, boolean availability, Audiovisuales aud, int type)throws IOException{
-        aud.setAvailability(availability);
+        Audiovisuales aud2=new Audiovisuales();
+        System.out.println("Hi");
         if(type==0){
-            Laptop lap=new Laptop();
+            Laptop lap;
             for(int i=0; i<this.regsQuantity; i++){
-                lap=(Laptop) aud;
-                if(lap.getRegisterNumber()==registerNumber){
+                aud2=this.getAudiovisual(i);
+                if(aud2.getRegisterNumber()==registerNumber){
+                    System.out.println("Dentro "+i);
+                    aud.setAvailability(availability);
+                    lap=(Laptop)aud;
                     putValueForLaptop(i, lap);
                 }
             }
         }//fin if type 0
         if(type==1){
-            Proyector pro=new Proyector();
+            Proyector pro;
             for(int i=0; i<this.regsQuantity; i++){
-                pro=(Proyector) aud;
-                if(pro.getRegisterNumber()==registerNumber){
+                aud2=this.getAudiovisual(i);
+                if(aud2.getRegisterNumber()==registerNumber){
+                    System.out.println("Dentro "+i);
+                    aud.setAvailability(availability);
+                    pro=(Proyector)aud;
                     putValueForProyector(i, pro);
                 }
             }
         }//fin if type 1
         if(type==2){
-            Parlantes par=new Parlantes();
+            Parlantes par;
             for(int i=0; i<this.regsQuantity; i++){
-                par=(Parlantes) aud;
-                if(par.getRegisterNumber()==registerNumber){
+                aud2=this.getAudiovisual(i);
+                if(aud2.getRegisterNumber()==registerNumber){
+                    System.out.println("Dentro "+i);
+                    aud.setAvailability(availability);
+                    par=(Parlantes)aud;
                     putValueForParlantes(i, par);
                 }
             }
         }//fin if type 2
         if(type==3){
-            Cds cds=new Cds();
+            Cds cds;
             for(int i=0; i<this.regsQuantity; i++){
-                cds=(Cds) aud;
-                if(cds.getRegisterNumber()==registerNumber){
+                aud2=this.getAudiovisual(i);
+                if(aud2.getRegisterNumber()==registerNumber){
+                    System.out.println("Dentro "+i);
+                    aud.setAvailability(availability);
+                    cds=(Cds)aud;
                     putValueForCds(i, cds);
                 }
             }
         }//fin if type 3
         if(type==4){
-            Dvds dvds=new Dvds();
+            Dvds dvds;
             for(int i=0; i<this.regsQuantity; i++){
-                dvds=(Dvds) aud;
-                if(dvds.getRegisterNumber()==registerNumber){
+                aud2=this.getAudiovisual(i);
+                if(aud2.getRegisterNumber()==registerNumber){
+                    System.out.println("Dentro "+i);
+                    aud.setAvailability(availability);
+                    dvds=(Dvds)aud;
                     putValueForDvd(i, dvds);
                 }
             }
         }//fin if type 4
+    }
+    
+    public Audiovisuales getAudiovisual(int position)throws IOException{
+        //validar la posici'on
+        if(position >= 0 && position <= this.regsQuantity){
+            //colocamos el brazo en el lugar adecuado
+            randomAF.seek(position * this.regsSize);
+            //llevamos a cabo la lectura
+            Audiovisuales aud = new Audiovisuales();
+            setDefaultAtributes(aud);
+            
+            return aud;
+        }else{
+            System.err.println("1003 - position is out of bounds");
+            return null;
+        }
     }
     
 }//fin clase
