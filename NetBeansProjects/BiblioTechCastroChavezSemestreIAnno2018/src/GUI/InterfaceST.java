@@ -50,7 +50,7 @@ public class InterfaceST extends javax.swing.JFrame {
                 in.close();
             }
         }catch(Exception ex){
-            jLabel1.setText(ex.getMessage());
+            
         }   
     }
     
@@ -170,13 +170,13 @@ public class InterfaceST extends javax.swing.JFrame {
                             .addComponent(jComboCareer, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelcarnet2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(42, 42, 42)
                                 .addComponent(jButtonB))
                             .addComponent(jTextFieldY, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
+                        .addGap(123, 123, 123)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,9 +201,9 @@ public class InterfaceST extends javax.swing.JFrame {
                         .addComponent(jLabelCarnet)
                         .addComponent(jLabelcarnet2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButtonB))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -341,7 +341,7 @@ public class InterfaceST extends javax.swing.JFrame {
          }
         jLabelcarnet2.setText(carnet);
         
-        open = new Student(carnet, n, Digit, a, e, i, y);
+        open = new Student(carnet, n, Digit, a, e, i, y, 0, 0);
             if(aS.search(open.getCarnet()) != -1){
               jLabel1.setText("El codigo del alumno ya existe");
                 
